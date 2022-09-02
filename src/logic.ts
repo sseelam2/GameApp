@@ -61,7 +61,12 @@ function resolveCoinCollisions(state: IGameState) {
   state.coins.slice().forEach((coin) => {
     const player = state.players.find((p) => p.x === coin.x && p.y === coin.y);
     if (player) {
-      player.score++;
+      if(coin.color == 'green'){
+        player.score++;
+      } else{
+        console.log("inside")
+        player.score--;
+      }
       state.coins = state.coins.filter((c) => c !== coin);
     }
   });
@@ -98,7 +103,14 @@ function addMoreCoins(state: IGameState) {
   while (state.coins.length < coinCount) {
     const location = getUnoccupiedLocation(state);
     const isDeadly = Math.floor(Math.random() * 2) === 1;
-    state.coins.push({ ...location, isDeadly });
+   const randomValue = Math.random() * 2;
+    var color: string = 'red';
+    if(randomValue>1) {
+      color = 'red'
+    } else {
+      color = 'green'
+    }
+    state.coins.push({ ...location, isDeadly, color});
   }
 }
 

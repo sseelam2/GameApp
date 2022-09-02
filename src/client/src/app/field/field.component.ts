@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { IPlayer, IGameState } from '../../../../models';
 
-const DEFAULT_COIN_COLOR = 'yellow';
+const COIN_COLOR_WIN = 'green';
+const COIN_COLOR_LOSE = 'red';
 const DEFAULT_OTHER_PLAYER_COLOR = 'red';
 const DEFAULT_PLAYER_COLOR = 'blue';
 const DEFAULT_PLAYER_NAME = 'You';
@@ -132,11 +133,17 @@ export class FieldComponent implements AfterViewInit, OnChanges {
       }))
       .filter((c) => c.canvasCoord);
 
+    var count: number = 0;
     for (let coin of visibleCoins) {
       const x = coin.canvasCoord!.x;
       const y = coin.canvasCoord!.y;
 
-      this.drawCircle(x, y, this.playerSize, DEFAULT_COIN_COLOR, 'gray');
+      if(coin.coin.color == 'green') {
+        this.drawCircle(x, y, this.playerSize, COIN_COLOR_WIN, 'gray'); 
+      } else {
+        this.drawCircle(x, y, this.playerSize, COIN_COLOR_LOSE, 'gray');
+      }  
+      count+=1
     }
   }
 

@@ -20,6 +20,7 @@ export interface ICoin {
   x: number;
   y: number;
   isDeadly?: boolean;
+  color: string;
 }
 
 export type Command = 'left' | 'right' | 'up' | 'down';
